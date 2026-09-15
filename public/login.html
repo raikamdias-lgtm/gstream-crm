@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gstream CRM</title>
+
+    <link rel="icon" href="img/logo.png">
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="login-card">
+
+    <img src="img/logo.png" class="logo">
+
+    <h1>Gstream CRM</h1>
+    <p>Gerenciamento de Clientes IPTV</p>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <i class="fa-solid fa-user"></i>
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Usuário"
+                required
+            >
+        </div>
+
+        <div class="input-group">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Senha"
+                required
+            >
+
+            <i
+                class="fa-solid fa-eye mostrarSenha"
+                id="mostrarSenha">
+            </i>
+
+        </div>
+
+        <button type="submit">
+
+            Entrar
+
+        </button>
+
+    </form>
+
+    <span id="erroLogin"></span>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>

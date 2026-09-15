@@ -1,0 +1,26 @@
+# Dependências
+node_modules/
+
+# Variáveis e segredos
+.env
+.env.*
+!.env.example
+
+# Bancos locais
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

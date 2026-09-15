@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Segurança | Gstream CRM</title>
+
+    <link
+        rel="icon"
+        href="img/logo.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/seguranca.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="background"></div>
+
+
+<div class="seguranca-container">
+
+
+    <!-- ================================= -->
+    <!-- CABEÇALHO -->
+    <!-- ================================= -->
+
+    <div class="seguranca-topo">
+
+        <div>
+
+            <span class="mini-titulo">
+                CONFIGURAÇÕES
+            </span>
+
+            <h1>
+                Segurança da conta
+            </h1>
+
+            <p>
+                Altere seu usuário e sua senha de acesso.
+            </p>
+
+        </div>
+
+
+        <div class="icone-seguranca">
+
+            <i
+                class="fa-solid fa-shield-halved">
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- CARD -->
+    <!-- ================================= -->
+
+    <div class="seguranca-card">
+
+
+        <div class="card-titulo">
+
+            <div class="card-icone">
+
+                <i
+                    class="fa-solid fa-user-lock">
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Dados de acesso
+                </h2>
+
+                <p>
+                    Atualize suas informações de login.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="formSeguranca">
+
+
+            <!-- ============================= -->
+            <!-- SENHA ATUAL -->
+            <!-- ============================= -->
+
+            <div class="campo">
+
+                <label
+                    for="senhaAtual"
+                >
+                    Senha atual
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-lock">
+                    </i>
+
+                    <input
+                        type="password"
+                        id="senhaAtual"
+                        placeholder="Digite sua senha atual"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-senha"
+                        data-target="senhaAtual"
+                    >
+
+                        <i
+                            class="fa-solid fa-eye">
+                        </i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- NOVO USUÁRIO -->
+            <!-- ============================= -->
+
+            <div class="campo">
+
+                <label
+                    for="novoUsuario"
+                >
+                    Novo usuário
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-user">
+                    </i>
+
+                    <input
+                        type="text"
+                        id="novoUsuario"
+                        placeholder="Digite o novo usuário"
+                        minlength="3"
+                        maxlength="50"
+                    >
+
+                </div>
+
+                <small>
+                    Deixe vazio para manter o usuário atual.
+                </small>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- NOVA SENHA -->
+            <!-- ============================= -->
+
+            <div class="campo">
+
+                <label
+                    for="novaSenha"
+                >
+                    Nova senha
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-key">
+                    </i>
+
+                    <input
+                        type="password"
+                        id="novaSenha"
+                        placeholder="Digite a nova senha"
+                        minlength="6"
+                        maxlength="100"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="mostrar-senha"
+                        data-target="novaSenha"
+                    >
+
+                        <i
+                            class="fa-solid fa-eye">
+                        </i>
+
+                    </button>
+
+                </div>
+
+                <small>
+                    Deixe vazio para manter a senha atual.
+                    Mínimo de 6 caracteres.
+                </small>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- CONFIRMAR NOVA SENHA -->
+            <!-- ============================= -->
+
+            <div
+                class="campo"
+                id="campoConfirmarSenha"
+            >
+
+                <label
+                    for="confirmarSenha"
+                >
+                    Confirmar nova senha
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-key">
+                    </i>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite novamente a nova senha"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="mostrar-senha"
+                        data-target="confirmarSenha"
+                    >
+
+                        <i
+                            class="fa-solid fa-eye">
+                        </i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- MENSAGEM -->
+            <!-- ============================= -->
+
+            <div
+                id="mensagemSeguranca"
+                class="mensagem"
+            >
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- BOTÕES -->
+            <!-- ============================= -->
+
+            <div class="acoes">
+
+                <button
+                    type="button"
+                    class="btn-voltar"
+                    onclick="history.back()"
+                >
+
+                    <i
+                        class="fa-solid fa-arrow-left">
+                    </i>
+
+                    Voltar
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="btnSalvar"
+                    class="btn-salvar"
+                >
+
+                    <i
+                        class="fa-solid fa-floppy-disk">
+                    </i>
+
+                    Salvar alterações
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- AVISO -->
+    <!-- ================================= -->
+
+    <div class="aviso-seguranca">
+
+        <i
+            class="fa-solid fa-circle-info">
+        </i>
+
+        <div>
+
+            <strong>
+                Segurança
+            </strong>
+
+            <p>
+                Sua senha é armazenada de forma protegida
+                utilizando criptografia bcrypt.
+                Nunca armazenamos sua senha em texto puro.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script src="js/seguranca.js"></script>
+
+
+</body>
+
+</html>

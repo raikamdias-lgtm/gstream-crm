@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Gstream CRM</title>
+
+
+<link rel="icon" href="img/logo.png">
+
+<link rel="stylesheet" href="css/financeiro.css">
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+
+
+<!-- SIDEBAR -->
+
+
+<aside class="sidebar">
+
+
+<div class="logo">
+
+
+<img src="img/logo.png">
+
+
+<h2>Gstream CRM</h2>
+
+
+</div>
+
+
+
+
+<ul class="menu">
+
+
+
+<li class="active" data-page="dashboard">
+
+
+<i class="fa-solid fa-chart-line"></i>
+
+
+<span>Dashboard</span>
+
+
+</li>
+
+
+
+
+<li data-page="clientes">
+
+
+<i class="fa-solid fa-users"></i>
+
+
+<span>Clientes</span>
+
+
+</li>
+
+
+<li data-page="financeiro">
+
+    <i class="fa-solid fa-wallet"></i>
+
+    <span>Financeiro</span>
+
+</li>
+
+
+
+
+<li data-page="vencimentos">
+
+
+<i class="fa-solid fa-calendar-days"></i>
+
+
+<span>Vencimentos</span>
+
+
+</li>
+
+
+
+
+<li data-page="config">
+
+
+<i class="fa-solid fa-gear"></i>
+
+
+<span>Configurações</span>
+
+
+</li>
+
+
+
+</ul>
+
+
+</aside>
+
+
+
+
+
+<!-- CONTEÚDO -->
+
+
+<div class="content">
+
+
+
+<header>
+
+
+
+<div>
+
+
+<h1 id="tituloPagina">
+
+Dashboard
+
+</h1>
+
+
+<p id="dataHoje"></p>
+
+
+</div>
+
+
+
+
+
+<div class="user">
+
+
+<span id="usuarioLogado"></span>
+
+
+
+<button id="logout">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+
+Sair
+
+
+</button>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<!-- CARDS DASHBOARD -->
+
+
+<!-- ÁREA DINÂMICA -->
+
+<main id="pagina"></main>
+
+
+
+
+<!-- ÁREA DINÂMICA -->
+
+
+<main id="pagina">
+
+
+</main>
+
+
+
+</div>
+
+
+<!-- MODAL CLIENTE -->
+
+
+<div id="modalCliente" class="modal">
+
+
+
+<div class="modal-box">
+
+
+
+<h2 id="tituloModal">
+Novo Cliente
+</h2>
+
+
+
+
+
+<form id="formCliente">
+
+
+
+
+
+<input
+type="hidden"
+id="clienteId"
+>
+
+
+
+
+
+<input
+type="text"
+id="nome"
+placeholder="Nome do cliente"
+required
+>
+
+
+
+
+
+<input
+type="text"
+id="whatsapp"
+placeholder="WhatsApp"
+required
+>
+
+
+
+
+
+<input
+type="text"
+id="usuario"
+placeholder="Usuário IPTV"
+required
+>
+
+
+
+
+
+<input
+type="text"
+id="aplicativo"
+placeholder="Aplicativo"
+required
+>
+
+
+<div class="linha-form">
+
+
+    <div>
+
+        <label>
+            Plano
+        </label>
+
+        <input
+        type="text"
+        id="plano"
+        placeholder="Ex: Mensal IPTV"
+        >
+
+    </div>
+
+
+
+    <div>
+
+        <label>
+            Valor
+        </label>
+
+        <input
+        type="number"
+        id="valor"
+        placeholder="Ex: 30.00"
+        step="0.01"
+        >
+
+    </div>
+
+
+
+
+    <div>
+
+        <label>
+            Telas
+        </label>
+
+        <input
+            type="number"
+            id="telas"
+            min="1"
+            value="1"
+            required
+        >
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ==========================
+     DATA DE CADASTRO
+========================== -->
+
+<div class="campo-data">
+
+    <label>Data de cadastro</label>
+
+    <div class="input-data">
+
+        <input
+            type="text"
+            id="dataInicio"
+            placeholder="DD/MM/AAAA"
+            maxlength="10"
+        >
+
+        <input
+            type="date"
+            id="calendarioInicio"
+            class="calendario"
+            title="Selecionar data"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- ==========================
+     DATA DE PAGAMENTO
+========================== -->
+
+<div class="campo-data">
+
+    <label>Data de pagamento</label>
+
+    <div class="input-data">
+
+        <input
+            type="text"
+            id="data_pagamento"
+            placeholder="DD/MM/AAAA"
+            maxlength="10"
+            required
+        >
+
+        <input
+            type="date"
+            id="calendarioPagamento"
+            class="calendario"
+            title="Selecionar data"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- ==========================
+     DATA DE VENCIMENTO
+========================== -->
+
+<div class="campo-data">
+
+    <label>Data de vencimento</label>
+
+    <div class="input-data">
+
+        <input
+            type="text"
+            id="data_expiracao"
+            placeholder="DD/MM/AAAA"
+            maxlength="10"
+            required
+        >
+
+        <input
+            type="date"
+            id="calendarioExpiracao"
+            class="calendario"
+            title="Selecionar data"
+        >
+
+    </div>
+
+</div>
+
+
+
+<textarea
+id="descricao"
+placeholder="Descrição ou observação do cliente">
+</textarea>
+
+
+
+
+
+
+<div class="acoes-modal">
+
+
+
+
+
+<button
+type="button"
+id="fecharModal"
+>
+
+Cancelar
+
+</button>
+
+
+
+
+
+<button
+type="submit"
+id="btnSalvarCliente"
+>
+
+Salvar
+
+</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- SCRIPTS -->
+
+
+<script src="js/utils.js"></script>
+
+<script src="js/app.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+<script src="js/clientes.js"></script>
+
+<script src="js/vencimentos.js"></script>
+
+<script src="js/financeiro.js"></script>
+
+<script src="js/navegacao.js"></script>
+
+
+
+
+</body>
+
+
+</html>
