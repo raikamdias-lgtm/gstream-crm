@@ -7,6 +7,9 @@ const session = require("express-session");
 const inicializarBanco =
     require("./database/init");
 
+const sessionStore =
+    require("./database/sessionStore");
+
 const authRoutes =
     require("./routes/auth");
 
@@ -24,26 +27,42 @@ const app = express();
 const PORT =
     process.env.PORT || 3000;
 
+const producao =
+    process.env.NODE_ENV === "production";
+
 
 // ==========================
 // SEGURANÇA
 // ==========================
 
 if (!process.env.SESSION_SECRET) {
-
     console.error(
         "❌ SESSION_SECRET não configurado no .env"
     );
-
     process.exit(1);
 }
 
+if (!process.env.TURSO_DATABASE_URL) {
+    console.error(
+        "❌ TURSO_DATABASE_URL não configurado no .env"
+    );
+    process.exit(1);
+}
+
+if (!process.env.TURSO_AUTH_TOKEN) {
+    console.error(
+        "❌ TURSO_AUTH_TOKEN não configurado no .env"
+    );
+    process.exit(1);
+}
+
+if (producao) {
+    app.set("trust proxy", 1);
+}
 
 app.disable("x-powered-by");
 
-app.use(
-    helmet()
-);
+app.use(helmet());
 
 
 // ==========================
@@ -56,7 +75,6 @@ app.use(
     })
 );
 
-
 app.use(
     express.urlencoded({
         extended: true,
@@ -64,49 +82,32 @@ app.use(
     })
 );
 
-
-app.use(
-    express.static("public")
-);
+app.use(express.static("public"));
 
 
 // ==========================
 // SESSÃO
 // ==========================
 
-const producao =
-    process.env.NODE_ENV === "production";
-
-
 app.use(
-
     session({
+        name: "gstream.sid",
 
-        secret:
-            process.env.SESSION_SECRET,
+        secret: process.env.SESSION_SECRET,
+
+        store: sessionStore,
 
         resave: false,
 
         saveUninitialized: false,
 
         cookie: {
-
             httpOnly: true,
-
             secure: producao,
-
             sameSite: "lax",
-
-            maxAge:
-                1000 *
-                60 *
-                60 *
-                8
-
+            maxAge: 1000 * 60 * 60 * 8
         }
-
     })
-
 );
 
 
@@ -114,10 +115,7 @@ app.use(
 // ROTAS DE AUTENTICAÇÃO
 // ==========================
 
-app.use(
-    "/api",
-    authRoutes
-);
+app.use("/api", authRoutes);
 
 
 // ==========================
@@ -126,13 +124,9 @@ app.use(
 // ==========================
 
 app.use(
-
     "/api/clientes",
-
     verificarAutenticacao,
-
     clientesRoutes
-
 );
 
 
@@ -142,13 +136,9 @@ app.use(
 // ==========================
 
 app.use(
-
     "/api/pagamentos",
-
     verificarAutenticacao,
-
     pagamentosRoutes
-
 );
 
 
@@ -156,42 +146,26 @@ app.use(
 // PÁGINA INICIAL
 // ==========================
 
-app.get(
-    "/",
-    (req, res) => {
-
-        res.sendFile(
-            __dirname +
-            "/public/login.html"
-        );
-
-    }
-);
+app.get("/", (req, res) => {
+    res.sendFile(
+        __dirname +
+        "/public/login.html"
+    );
+});
 
 
 // ==========================
 // TRATAMENTO DE ERRO
 // ==========================
 
-app.use(
-    (err, req, res, next) => {
+app.use((err, req, res, next) => {
+    console.error("Erro interno:", err);
 
-        console.error(
-            "Erro interno:",
-            err
-        );
-
-        res.status(500).json({
-
-            sucesso: false,
-
-            erro:
-                "Erro interno do servidor."
-
-        });
-
-    }
-);
+    res.status(500).json({
+        sucesso: false,
+        erro: "Erro interno do servidor."
+    });
+});
 
 
 // ==========================
@@ -199,66 +173,51 @@ app.use(
 // ==========================
 
 async function iniciar() {
-
     try {
-
         console.log(
             "SERVIDOR PRINCIPAL CARREGADO"
         );
 
-
         await inicializarBanco();
 
+        app.listen(PORT, () => {
+            console.log(
+                `🚀 Servidor rodando em http://localhost:${PORT}`
+            );
 
-        app.listen(
+            console.log(
+                "🔐 Autenticação por sessão ativada."
+            );
 
-            PORT,
+            console.log(
+                "🛡️ Proteções de segurança ativadas."
+            );
 
-            () => {
+            console.log(
+                "💾 Sessões persistentes no Turso ativadas."
+            );
 
-                console.log(
-                    `🚀 Servidor rodando em http://localhost:${PORT}`
-                );
+            console.log(
+                "👥 API clientes protegida."
+            );
 
-                console.log(
-                    "🔐 Autenticação por sessão ativada."
-                );
+            console.log(
+                "💰 API financeira protegida."
+            );
 
-                console.log(
-                    "🛡️ Proteções de segurança ativadas."
-                );
-
-                console.log(
-                    "👥 API clientes protegida."
-                );
-
-                console.log(
-                    "💰 API financeira protegida."
-                );
-
-                console.log(
-                    "🔑 Alteração de login e senha ativada."
-                );
-
-            }
-
-        );
-
-
+            console.log(
+                "🔑 Alteração de login e senha ativada."
+            );
+        });
     } catch (erro) {
-
         console.error(
             "❌ Erro ao iniciar servidor:"
         );
 
-        console.error(
-            erro
-        );
-
+        console.error(erro);
+        process.exit(1);
     }
-
 }
-
 
 iniciar();
 

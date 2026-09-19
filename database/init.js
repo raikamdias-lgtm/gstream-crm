@@ -342,7 +342,17 @@ async function inicializarBanco() {
         ) {
 
             const senhaInicial =
-                "admin123";
+                process.env.INITIAL_ADMIN_PASSWORD;
+
+
+            if (!senhaInicial) {
+
+                throw new Error(
+                    "INITIAL_ADMIN_PASSWORD não configurado no .env." +
+                    "Defina uma senha inicial forte antes de iniciar o CRM pela primeira vez."
+                );
+
+            }
 
 
             const senhaHash =
@@ -378,15 +388,11 @@ async function inicializarBanco() {
             );
 
             console.log(
-                "👤 Usuário inicial: admin"
+                "👤 Usuário inicial criado a partir das variáveis de ambiente."
             );
 
             console.log(
-                "🔑 Senha inicial: admin123"
-            );
-
-            console.log(
-                "⚠️ Altere a senha nas configurações."
+                "⚠️ Altere a senha após o primeiro login."
             );
 
 
@@ -397,6 +403,38 @@ async function inicializarBanco() {
             );
 
         }
+
+
+        // =================================================
+        // SESSÕES
+        // =================================================
+
+        await db.execute(`
+
+            CREATE TABLE IF NOT EXISTS sessoes (
+
+                sid_hash TEXT PRIMARY KEY,
+
+                data TEXT NOT NULL,
+
+                expires_at TEXT NOT NULL
+
+            );
+
+        `);
+
+
+        await db.execute(`
+
+            DELETE FROM sessoes
+            WHERE julianday(expires_at) <= julianday('now')
+
+        `);
+
+
+        console.log(
+            "✅ Tabela sessoes criada/verificada."
+        );
 
 
         // =================================================

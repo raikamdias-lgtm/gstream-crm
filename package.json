@@ -1,26 +1,29 @@
 {
-  "name": "crm",
+  "name": "gstream-crm",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CRM web para gerenciamento de clientes, pagamentos e vencimentos.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Nenhum teste automatizado configurado.\""
   },
-  "keywords": [],
+  "keywords": [
+    "crm",
+    "nodejs",
+    "express",
+    "turso"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "@libsql/client": "^0.17.4",
     "bcrypt": "^6.0.0",
-    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-rate-limit": "^8.6.2",
     "express-session": "^1.19.0",
-    "helmet": "^8.3.0",
-    "jsonwebtoken": "^9.0.3",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^6.0.1"
+    "helmet": "^8.3.0"
   }
 }
