@@ -267,7 +267,7 @@ function enviarCobranca(numero, nome, dataExpiracao) {
         `\u26A0\uFE0F Evite o bloqueio automático mantendo sua assinatura em dia.\n\n` +
         `\uD83C\uDF81 Indique um amigo, após a ativação dele(a), você ganha 1 mês grátis!\n\n` +
         `\u2705 Renove agora\u2757\n\n` +
-        `\uD83D\uDC60 CHAVE PIX INFINITY PAY\n` +
+        `\uD83D\uDD39 CHAVE PIX INFINITY PAY\n` +
         `Pix E-mail: maikdias.n@gmail.com\n\n` +
 
         `\uD83D\uDCF1 Suporte: http://wa.me/5592920007538\n` +
