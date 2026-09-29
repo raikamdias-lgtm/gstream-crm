@@ -101,17 +101,33 @@ function renderizarClientes(listaClientes) {
 
             <div class="cliente-resumo">
 
-                <div class="cliente-info-principal">
+<div class="cliente-info-principal">
 
-                    <h3>
-                        ${escaparHTML(cliente.name || "Cliente")}
-                    </h3>
+    <div class="cliente-nome-area">
 
-                    <span class="badge ${status.classe}">
-                        ${status.texto}
-                    </span>
+        <button
+            type="button"
+            class="btn-destaque ${Number(cliente.destacado) === 1 ? "ativo" : ""}"
+            title="${
+                Number(cliente.destacado) === 1
+                    ? "Remover dos destaques"
+                    : "Destacar cliente"
+            }"
+        >
+            <i class="fa-solid fa-thumbtack"></i>
+        </button>
 
-                </div>
+        <h3>
+            ${escaparHTML(cliente.name || "Cliente")}
+        </h3>
+
+    </div>
+
+    <span class="badge ${status.classe}">
+        ${status.texto}
+    </span>
+
+</div>
 
                 <i class="icone-expandir fa-solid fa-chevron-down"></i>
 
@@ -257,6 +273,95 @@ function renderizarClientes(listaClientes) {
 
 
         lista.appendChild(card);
+
+
+// =====================================================
+// DESTACAR CLIENTE
+// =====================================================
+
+const botaoDestaque =
+    card.querySelector(".btn-destaque");
+
+
+if (botaoDestaque) {
+
+    botaoDestaque.addEventListener(
+        "click",
+        async event => {
+
+            event.stopPropagation();
+
+            try {
+
+                botaoDestaque.disabled = true;
+
+
+                const resposta =
+                    await fetch(
+                        `/api/clientes/${cliente.id}/destaque`,
+                        {
+                            method: "PATCH",
+
+                            credentials:
+                                "same-origin"
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    resposta.status === 401
+                ) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        dados.erro ||
+                        "Erro ao destacar cliente."
+                    );
+
+                }
+
+
+                await carregarClientes();
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao destacar cliente:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message ||
+                    "Erro ao alterar destaque."
+                );
+
+
+            } finally {
+
+                botaoDestaque.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+ []}
 
 
         // =====================================================
@@ -1599,8 +1704,3 @@ window.abrirWhats =
 
 window.aplicarPesquisa =
     aplicarPesquisa;
-
-
-
-
-
