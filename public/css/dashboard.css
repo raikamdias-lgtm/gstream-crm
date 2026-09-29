@@ -1249,3 +1249,70 @@ header h1 {
     }
 
 }
+.cliente-nome-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.btn-destaque {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        0.2s ease;
+}
+
+
+.btn-destaque:hover {
+    color: #39ff88;
+
+    background: rgba(
+        57,
+        255,
+        136,
+        0.08
+    );
+}
+
+
+.btn-destaque.ativo {
+    color: #39ff88;
+
+    background: rgba(
+        57,
+        255,
+        136,
+        0.12
+    );
+}
+
+
+.btn-destaque.ativo i {
+    transform: rotate(-20deg);
+}
+
+
+.btn-destaque:disabled {
+    opacity: 0.5;
+
+    cursor: wait;
+}
+
+.cliente-destacado {
+    border-left: 3px solid #39ff88;
+}
