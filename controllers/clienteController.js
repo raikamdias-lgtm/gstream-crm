@@ -244,7 +244,7 @@ const clienteController = {
 
 
             sql +=
-                ` ORDER BY id DESC`;
+                ` ORDER BY destacado DESC, id DESC`;
 
 
             const resultado =
@@ -896,7 +896,113 @@ const clienteController = {
 
         }
 
+    },
+
+// =====================================================
+// DESTACAR / DESDESTACAR CLIENTE
+// =====================================================
+
+async destacar(req, res) {
+
+    try {
+
+        const { id } = req.params;
+
+        const resultado =
+            await db.execute({
+
+                sql: `
+                    SELECT destacado
+                    FROM clientes
+                    WHERE id = ?
+                `,
+
+                args: [id]
+
+            });
+
+
+        if (
+            resultado.rows.length === 0
+        ) {
+
+            return res.status(404).json({
+
+                sucesso: false,
+
+                erro:
+                    "Cliente não encontrado."
+
+            });
+
+        }
+
+
+        const atual =
+            Number(
+                resultado.rows[0].destacado || 0
+            );
+
+
+        const novoValor =
+            atual === 1
+                ? 0
+                : 1;
+
+
+        await db.execute({
+
+            sql: `
+                UPDATE clientes
+
+                SET destacado = ?
+
+                WHERE id = ?
+            `,
+
+            args: [
+                novoValor,
+                id
+            ]
+
+        });
+
+
+        res.json({
+
+            sucesso: true,
+
+            destacado:
+                novoValor === 1,
+
+            mensagem:
+                novoValor === 1
+                    ? "Cliente destacado."
+                    : "Cliente removido dos destaques."
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao destacar cliente:",
+            error
+        );
+
+
+        res.status(500).json({
+
+            sucesso: false,
+
+            erro:
+                "Erro ao alterar destaque do cliente."
+
+        });
+
     }
+
+},
 
 };
 
