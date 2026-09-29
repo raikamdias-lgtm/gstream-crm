@@ -75,6 +75,10 @@ router.delete(
     clienteController.excluir
 );
 
+router.patch(
+    "/:id/destaque",
+    clienteController.destacar
+);
+
 
 module.exports = router;
-
