@@ -262,8 +262,8 @@ function enviarCobranca(numero, nome, dataExpiracao) {
         `\u2728 Continue aproveitando acesso a:\n` +
         `\uD83D\uDCFA Canais abertos e fechados\n` +
         `\uD83C\uDFAC Filmes e séries\n` +
-        `\uD83C\uDF7F Plataformas premium como: Netflix, Prime Vídeo, Disney+, HBO Max e muito mais.\n\n` +
-        `\uD83C\uDF10 Nosso site: https://gstreambox.netlify.app\n` +
+        `\uD83C\uDF7F Plataformas premium como: Netflix, Prime Vídeo, Disney+, HBO Max e muito mais.\n` +
+        `\uD83C\uDF10 Nosso site: https://gstreambox.netlify.app\n\n` +
 
         `\u26A0\uFE0F Evite o bloqueio automático mantendo sua assinatura em dia.\n\n` +
         `\uD83C\uDF81 Indique um amigo, após a ativação dele(a), você ganha 1 mês grátis!\n\n` +
