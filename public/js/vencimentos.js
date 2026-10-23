@@ -255,7 +255,7 @@ function enviarCobranca(numero, nome, dataExpiracao) {
             : dataExpiracao;
 
     const mensagem =
-        `*${nome}*\n\n` +
+        `$*{nome}*\n\n` +
 
         `\u26A0\uFE0F Lembrete Importante!\n\n` +
 
